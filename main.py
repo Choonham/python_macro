@@ -70,6 +70,8 @@ class AddAndEditMacroWindow(QWidget):
 
         self.setLayout(self.wrapper)
 
+        #asdf
+
 
 class MyApp(QWidget):
 
