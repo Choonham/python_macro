@@ -65,7 +65,6 @@ class AddAndEditMacroWindow(QWidget):
 
         self.wrapper = QVBoxLayout()
 
-        # 주석
 
         self.wrapper.addLayout(self.h_box_layout_1)
         self.wrapper.addLayout(self.h_box_layout_2, 5)
