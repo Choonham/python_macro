@@ -121,12 +121,17 @@ class AddAndEditMacroWindow(QWidget):
 
         self.h_box_layout_2 = QHBoxLayout()
 
-        self.v_box_1_inside_layout_2 = QVBoxLayout
+        self.v_box_1_inside_layout_2 = QVBoxLayout()
         label1 = QLabel('매크로 이름:')
         label1.setAlignment(Qt.AlignLeft)
         self.v_box_1_inside_layout_2.addWidget(label1)
 
-        self.h_box_layout_2.addwidget(self.v_box_1_inside_layout_2)
+        # 예외 수정(2022.12.12)
+        # 이전 코드
+        # self.h_box_layout_2.addLayout(self.v_box_1_inside_layout_2)
+        # addWidget 으로 layout 추가하려는 이상한 시도 수정
+
+        self.h_box_layout_2.addLayout(self.v_box_1_inside_layout_2)
 
 
         start_button = QPushButton('시작/중지 설정')
@@ -175,7 +180,7 @@ class AddAndEditMacroWindow(QWidget):
 
         self.setLayout(self.wrapper)
 
-        start_button.clicked.connect(self.start_macro)
+        #start_button.clicked.connect(self.start_macro)
 
     def start_macro(self):
         self.start_macro_window = Startsetting("Start setting")
