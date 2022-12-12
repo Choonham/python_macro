@@ -1,6 +1,6 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QHBoxLayout, QVBoxLayout, QMainWindow, QRadioButton, \
-    QLineEdit, QLabel, QCheckBox, QListWidget
+    QLineEdit, QLabel, QCheckBox, QListWidget, QTextEdit, QTextBrowser
 from PyQt5.QtCore import Qt
 
 class MyApp(QWidget):
@@ -119,14 +119,24 @@ class AddAndEditMacroWindow(QWidget):
         # font1.setPointSize(12)
         # label1.setFont(font1)
 
+        self.h_box_layout_2 = QHBoxLayout()
+
+        self.v_box_1_inside_layout_2 = QVBoxLayout
+        label1 = QLabel('매크로 이름:')
+        label1.setAlignment(Qt.AlignLeft)
+        self.v_box_1_inside_layout_2.addWidget(label1)
+
+        self.h_box_layout_2.addwidget(self.v_box_1_inside_layout_2)
+
+
         start_button = QPushButton('시작/중지 설정')
         mouse_button = QPushButton('마우스 추가')
         keyboard_button = QPushButton('키보드 추가')
         delay_button = QPushButton('지연 추가')
 
 
-        self.h_box_layout_2 = QHBoxLayout()
-        self.v_box_1_inside_layout_2 = QVBoxLayout()
+        self.h_box_layout_3 = QHBoxLayout()
+        self.v_box_3_inside_layout_3 = QVBoxLayout()
 
         self.command_list = QListWidget()
         self.command_list.setWordWrap(True)
@@ -139,28 +149,29 @@ class AddAndEditMacroWindow(QWidget):
         self.command_list.setGeometry(0, 0, 1000, 1000)
         self.command_list.insertItem(0, "매크로 1")
 
-        self.v_box_1_inside_layout_2.addWidget(self.command_list)
+        self.v_box_3_inside_layout_3.addWidget(self.command_list)
 
-        self.v_box_2_inside_layout_2 = QVBoxLayout()
+        self.v_box_4_inside_layout_3 = QVBoxLayout()
 
-        self.v_box_2_inside_layout_2.setSpacing(0)
-        self.v_box_2_inside_layout_2.addWidget(start_button)
-        self.v_box_2_inside_layout_2.addWidget(mouse_button)
-        self.v_box_2_inside_layout_2.addWidget(keyboard_button)
-        self.v_box_2_inside_layout_2.addWidget(delay_button)
+        self.v_box_4_inside_layout_3.setSpacing(0)
+        self.v_box_4_inside_layout_3.addWidget(start_button)
+        self.v_box_4_inside_layout_3.addWidget(mouse_button)
+        self.v_box_4_inside_layout_3.addWidget(keyboard_button)
+        self.v_box_4_inside_layout_3.addWidget(delay_button)
 
-        self.v_box_2_inside_layout_2.addStretch(0)
-        self.v_box_2_inside_layout_2.setSpacing(10)
-        self.v_box_2_inside_layout_2.setContentsMargins(0, 0, 0, 0)
+        self.v_box_4_inside_layout_3.addStretch(0)
+        self.v_box_4_inside_layout_3.setSpacing(10)
+        self.v_box_4_inside_layout_3.setContentsMargins(0, 0, 0, 0)
 
-        self.h_box_layout_2.addLayout(self.v_box_1_inside_layout_2, 3)
-        self.h_box_layout_2.addLayout(self.v_box_2_inside_layout_2, 1)
+        self.h_box_layout_3.addLayout(self.v_box_3_inside_layout_3, 3)
+        self.h_box_layout_3.addLayout(self.v_box_4_inside_layout_3, 1)
 
         self.wrapper = QVBoxLayout()
 
 
         self.wrapper.addLayout(self.h_box_layout_1)
-        self.wrapper.addLayout(self.h_box_layout_2, 5)
+        self.wrapper.addLayout(self.h_box_layout_2)
+        self.wrapper.addLayout(self.h_box_layout_3, 5)
 
         self.setLayout(self.wrapper)
 
@@ -181,22 +192,34 @@ class Startsetting(QWidget):
 
     def initWindow(self, title_str1):
         self.setWindowTitle(title_str1)
-        self.resize(450, 400)
+        self.resize(350, 300)
 
-        self.h_box_layout_1 = QHBoxLayout()
-
-        label1 = QLabel('Macro 시작 버튼을 설정하세요. \n반복 횟수가 0일 경우 중지버튼을 누르기 전까지 실행됩니다..', self)
-        label1.setAlignment(Qt.AlignLeft)
-        self.h_box_layout_1.addWidget(label1)
-
+        # self.h_box_layout_1 = QHBoxLayout()
+        # label1 = QLabel('Macro 시작 버튼을 설정하세요. \n반복 횟수가 0일 경우 중지버튼을 누르기 전까지 실행됩니다.', self)
+        # label1.setAlignment(Qt.AlignLeft)
+        # self.h_box_layout_1.addWidget(label1)
 
 
-        self.wrapper = QVBoxLayout()
-
-
-        self.wrapper.addLayout(self.h_box_layout_1)
-
-        self.setLayout(self.wrapper)
+        # self.h_box_layout_2 = QHBoxLayout()
+        #
+        # self.v_box_1_inside_layout_2 = QVBoxLayout
+        # label1 = QLabel('매크로 이름:', self)
+        # label1.setAlignment(Qt.AlignLeft)
+        # self.v_box_1_inside_layout_2.addWidget(self.label1)
+        #
+        # self.v_box2_inside_layout_2 = QVBoxLayout
+        # text1 = QTextBrowser(self)
+        # self.text.setPlainText(String)
+        # self.v_box2_inside_layout_2.addWidget(text1)
+        # self.h_box_layout_2.addLayout(self.v_box_1_inside_layout_2)
+        # self.h_box_layout_2.addWidget(self.v_box2_inside_layout_2)
+        #
+        #
+        # self.wrapper = QVBoxLayout()
+        # self.wrapper.addLayout(self.h_box_layout_1)
+        # self.wrapper.setAlignment(Qt.AlignTop)
+        # self.wrapper.addLayout(self.h_box_layout_2, 5)
+        # self.setLayout(self.wrapper)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
