@@ -125,19 +125,28 @@ class AddAndEditMacroWindow(QWidget):
         label1 = QLabel('매크로 이름:')
         label1.setAlignment(Qt.AlignLeft)
         self.v_box_1_inside_layout_2.addWidget(label1)
-
+        self.h_box_layout_2.addLayout(self.v_box_1_inside_layout_2)
         # 예외 수정(2022.12.12)
         # 이전 코드
         # self.h_box_layout_2.addLayout(self.v_box_1_inside_layout_2)
         # addWidget 으로 layout 추가하려는 이상한 시도 수정
 
-        self.h_box_layout_2.addLayout(self.v_box_1_inside_layout_2)
-
+        self.v_box_2_inside_layout_2 = QVBoxLayout()
+        name1 = QLineEdit()
+        self.textedit1 = QLineEdit(self)
+        self.textedit1.setText("이름을 입력하세요.")
+        self.v_box_2_inside_layout_2.addWidget(self.textedit1)
+        self.h_box_layout_2.addLayout(self.v_box_2_inside_layout_2)
+        #2022.12.12
+        #Textedit을 통한 Macro 이름 설정
+        #참고 문헌 https://newbie-developer.tistory.com/149
 
         start_button = QPushButton('시작/중지 설정')
         mouse_button = QPushButton('마우스 추가')
         keyboard_button = QPushButton('키보드 추가')
         delay_button = QPushButton('지연 추가')
+        delect_button = QPushButton('삭제')
+        save_button = QPushButton('저장')
 
 
         self.h_box_layout_3 = QHBoxLayout()
@@ -163,6 +172,8 @@ class AddAndEditMacroWindow(QWidget):
         self.v_box_4_inside_layout_3.addWidget(mouse_button)
         self.v_box_4_inside_layout_3.addWidget(keyboard_button)
         self.v_box_4_inside_layout_3.addWidget(delay_button)
+        self.v_box_4_inside_layout_3.addWidget(delect_button)
+        self.v_box_4_inside_layout_3.addWidget(save_button)
 
         self.v_box_4_inside_layout_3.addStretch(0)
         self.v_box_4_inside_layout_3.setSpacing(10)
@@ -180,7 +191,7 @@ class AddAndEditMacroWindow(QWidget):
 
         self.setLayout(self.wrapper)
 
-        #start_button.clicked.connect(self.start_macro)
+        start_button.clicked.connect(self.start_macro)
 
     def start_macro(self):
         self.start_macro_window = Startsetting("Start setting")
@@ -199,10 +210,10 @@ class Startsetting(QWidget):
         self.setWindowTitle(title_str1)
         self.resize(350, 300)
 
-        # self.h_box_layout_1 = QHBoxLayout()
-        # label1 = QLabel('Macro 시작 버튼을 설정하세요. \n반복 횟수가 0일 경우 중지버튼을 누르기 전까지 실행됩니다.', self)
-        # label1.setAlignment(Qt.AlignLeft)
-        # self.h_box_layout_1.addWidget(label1)
+        self.h_box_layout_1 = QHBoxLayout()
+        label1 = QLabel('Macro 시작 버튼을 설정하세요. \n반복 횟수가 0일 경우 중지버튼을 누르기 전까지 실행됩니다.', self)
+        label1.setAlignment(Qt.AlignLeft)
+        self.h_box_layout_1.addWidget(label1)
 
 
         # self.h_box_layout_2 = QHBoxLayout()
@@ -220,11 +231,11 @@ class Startsetting(QWidget):
         # self.h_box_layout_2.addWidget(self.v_box2_inside_layout_2)
         #
         #
-        # self.wrapper = QVBoxLayout()
-        # self.wrapper.addLayout(self.h_box_layout_1)
-        # self.wrapper.setAlignment(Qt.AlignTop)
+        self.wrapper = QVBoxLayout()
+        self.wrapper.addLayout(self.h_box_layout_1)
+        self.wrapper.setAlignment(Qt.AlignTop)
         # self.wrapper.addLayout(self.h_box_layout_2, 5)
-        # self.setLayout(self.wrapper)
+        self.setLayout(self.wrapper)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
