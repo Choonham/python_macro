@@ -207,7 +207,7 @@ class Startsetting(QWidget):
         self.initWindow(title_str1)
 
 
-    def initWindow(self, title_str1, setEditable=None):
+    def initWindow(self, title_str1):
         self.setWindowTitle(title_str1)
         self.resize(350, 300)
 
@@ -220,34 +220,24 @@ class Startsetting(QWidget):
         self.h_box_layout_2 = QHBoxLayout()
 
         self.v_box_1_inside_layout_2 = QVBoxLayout()
-        label2 = QLabel('시작 버튼:', self)
-        label2.setAlignment(Qt.AlignLeft)
-        self.v_box_1_inside_layout_2.addWidget(self.label2)
-        self.h_box_layout_2.addLayout(self.v_box_1_inside_layout_2)
+        label1 = QLabel('시작 버튼: ')
+        label1.setAlignment(Qt.AlignLeft)
+        self.v_box_1_inside_layout_2.addWidget(label1)
+        # self.h_box_layout_2.addLayout(self.v_box_1_inside_layout_2)
 
-        # self.v_box_2_inside_layout_2 = QVBoxLayout
-        #
-        # self.combo1 = QtWidgets.Qcombobox(self)
-        # self.combo1 = setEditable(True)
-        # self.Combo1_ledit = self.Combo1.lineEdit()
-        # self.Combo1_ledit.setAlignment(Qt.AlignCenter)
-        # self.Combo1_ledit.setReadOnly(True)
-        # font = QtGui.QFont('Arial', 10, QtGui.QFont.Bold)
-        #
-        # self.Combo1.setFont(font)
-        # self.Combo1.addItem("F1")
-        # self.Combo1.addItem('F2')
-        # self.Combo1.addItem('F3')
-        # self.Combo1.addItem('F4')
-        # self.Combo1.resize(100, 30)
-        # self.Combo1.move(10, 150)
-        # self.Combo1.activated[str].connect(self)
-        #
-        # self.v_box_2_inside_layout_2.addLayout(self.Combo1)
-        # self.h_box_layout_2.addLayout((self.v_box_2_inside_layout_2))
+        self.v_box_2_inside_layout_2 = QVBoxLayout
+
+        combo1 = QComboBox(self)
+        combo1_list = ['네이버', '카카오', '라인', '쿠팡', '배달의민족']
+        combo1.addItems(combo1_list)
+        self.v_box_2_inside_layout_2.addWidget(combo1)
+
+        self.h_box_layout_2.addLayout(self.v_box_1_inside_layout_2, 1)
+        self.h_box_layout_2.addLayout(self.v_box_2_inside_layout_2, 1)
 
         #221216 Combobox를 위해 import로 QtWdiget 및 QtGui 선언
         #Debug시 이상한 Error 발생
+        # 다시 수정했는데 왜 안되는지 모르겠음...
 
 
         self.wrapper = QVBoxLayout()
@@ -256,8 +246,6 @@ class Startsetting(QWidget):
         self.wrapper.addLayout(self.h_box_layout_2, 5)
         self.setLayout(self.wrapper)
 
-        # def onchanged(self, text):
-        #     self.command_list.setText(self.Combo1.currentText())
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
