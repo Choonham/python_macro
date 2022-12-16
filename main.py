@@ -1,6 +1,7 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QHBoxLayout, QVBoxLayout, QMainWindow, QRadioButton, \
-    QLineEdit, QLabel, QCheckBox, QListWidget, QTextEdit, QTextBrowser
+    QLineEdit, QLabel, QCheckBox, QListWidget, QTextEdit, QTextBrowser, QComboBox
+from PyQt5 import QtWidgets, QtGui
 from PyQt5.QtCore import Qt
 
 class MyApp(QWidget):
@@ -206,7 +207,7 @@ class Startsetting(QWidget):
         self.initWindow(title_str1)
 
 
-    def initWindow(self, title_str1):
+    def initWindow(self, title_str1, setEditable=None):
         self.setWindowTitle(title_str1)
         self.resize(350, 300)
 
@@ -216,26 +217,47 @@ class Startsetting(QWidget):
         self.h_box_layout_1.addWidget(label1)
 
 
-        # self.h_box_layout_2 = QHBoxLayout()
+        self.h_box_layout_2 = QHBoxLayout()
+
+        self.v_box_1_inside_layout_2 = QVBoxLayout()
+        label2 = QLabel('시작 버튼:', self)
+        label2.setAlignment(Qt.AlignLeft)
+        self.v_box_1_inside_layout_2.addWidget(self.label2)
+        self.h_box_layout_2.addLayout(self.v_box_1_inside_layout_2)
+
+        # self.v_box_2_inside_layout_2 = QVBoxLayout
         #
-        # self.v_box_1_inside_layout_2 = QVBoxLayout
-        # label1 = QLabel('매크로 이름:', self)
-        # label1.setAlignment(Qt.AlignLeft)
-        # self.v_box_1_inside_layout_2.addWidget(self.label1)
+        # self.combo1 = QtWidgets.Qcombobox(self)
+        # self.combo1 = setEditable(True)
+        # self.Combo1_ledit = self.Combo1.lineEdit()
+        # self.Combo1_ledit.setAlignment(Qt.AlignCenter)
+        # self.Combo1_ledit.setReadOnly(True)
+        # font = QtGui.QFont('Arial', 10, QtGui.QFont.Bold)
         #
-        # self.v_box2_inside_layout_2 = QVBoxLayout
-        # text1 = QTextBrowser(self)
-        # self.text.setPlainText(String)
-        # self.v_box2_inside_layout_2.addWidget(text1)
-        # self.h_box_layout_2.addLayout(self.v_box_1_inside_layout_2)
-        # self.h_box_layout_2.addWidget(self.v_box2_inside_layout_2)
+        # self.Combo1.setFont(font)
+        # self.Combo1.addItem("F1")
+        # self.Combo1.addItem('F2')
+        # self.Combo1.addItem('F3')
+        # self.Combo1.addItem('F4')
+        # self.Combo1.resize(100, 30)
+        # self.Combo1.move(10, 150)
+        # self.Combo1.activated[str].connect(self)
         #
-        #
+        # self.v_box_2_inside_layout_2.addLayout(self.Combo1)
+        # self.h_box_layout_2.addLayout((self.v_box_2_inside_layout_2))
+
+        #221216 Combobox를 위해 import로 QtWdiget 및 QtGui 선언
+        #Debug시 이상한 Error 발생
+
+
         self.wrapper = QVBoxLayout()
         self.wrapper.addLayout(self.h_box_layout_1)
         self.wrapper.setAlignment(Qt.AlignTop)
-        # self.wrapper.addLayout(self.h_box_layout_2, 5)
+        self.wrapper.addLayout(self.h_box_layout_2, 5)
         self.setLayout(self.wrapper)
+
+        # def onchanged(self, text):
+        #     self.command_list.setText(self.Combo1.currentText())
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
