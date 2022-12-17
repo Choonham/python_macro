@@ -195,12 +195,12 @@ class AddAndEditMacroWindow(QWidget):
         start_button.clicked.connect(self.start_macro)
 
     def start_macro(self):
-        self.start_macro_window = Startsetting("Start setting")
+        self.start_macro_window = StartSetting("Start setting")
 
         self.start_macro_window.show()
 
 
-class Startsetting(QWidget):
+class StartSetting(QWidget):
 
     def __init__(self, title_str1):
         super().__init__()
@@ -212,7 +212,7 @@ class Startsetting(QWidget):
         self.resize(350, 300)
 
         self.h_box_layout_1 = QHBoxLayout()
-        label1 = QLabel('Macro 시작 버튼을 설정하세요. \n반복 횟수가 0일 경우 중지버튼을 누르기 전까지 실행됩니다.', self)
+        label1 = QLabel('Macro 시작 버튼을 설정하세요. \n반복 횟수가 0일 경우 중지 버튼을 누르기 전까지 실행됩니다.', self)
         label1.setAlignment(Qt.AlignLeft)
         self.h_box_layout_1.addWidget(label1)
 
@@ -225,7 +225,10 @@ class Startsetting(QWidget):
         self.v_box_1_inside_layout_2.addWidget(label1)
         # self.h_box_layout_2.addLayout(self.v_box_1_inside_layout_2)
 
-        self.v_box_2_inside_layout_2 = QVBoxLayout
+        # 22.12.17 노영준: ******** 클래스 생성자 메서드를 실행하여 인스턴스 객체를 만드시는 겁니다. 클래스 이름을 띡하고 놓는 것이 아니라. ********
+        # QVBoxLayout() 메서드가 사용 가능한 QVBoxLayout 객체를 반환합니다.
+        # 그냥 QVBoxLayout 만 사용 하시면 안 됩니다.
+        self.v_box_2_inside_layout_2 = QVBoxLayout()
 
         combo1 = QComboBox(self)
         combo1_list = ['네이버', '카카오', '라인', '쿠팡', '배달의민족']
