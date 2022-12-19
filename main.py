@@ -227,10 +227,11 @@ class StartSetting(QWidget):
 
 
         self.h_box_layout_2 = QHBoxLayout() #시작버튼 Hbox2
-
         self.v_box_1_inside_layout_2 = QVBoxLayout()
+        self.v_box_1_inside_layout_2.setAlignment(Qt.AlignVCenter)
         label1 = QLabel('시작 버튼: ')
         label1.setAlignment(Qt.AlignLeft)
+
         self.v_box_1_inside_layout_2.addWidget(label1)
         # self.h_box_layout_2.addLayout(self.v_box_1_inside_layout_2)
 
@@ -243,32 +244,37 @@ class StartSetting(QWidget):
         combo1.addItems(combo1_list)
         self.v_box_2_inside_layout_2.addWidget(combo1)
 
+
         self.h_box_layout_2.addLayout(self.v_box_1_inside_layout_2, 1)
         self.h_box_layout_2.addLayout(self.v_box_2_inside_layout_2, 1)
+        self.h_box_layout_2.addStretch(3)
 
         self.h_box_layout_3 = QHBoxLayout() #종료버튼 Hbox3
 
         self.v_box_1_inside_layout_3 = QVBoxLayout()
         label1 = QLabel('종료 버튼: ')
         label1.setAlignment(Qt.AlignLeft)
-        self.v_box_1_inside_layout_2.addWidget(label1)
+        self.v_box_1_inside_layout_3.setAlignment(Qt.AlignVCenter)
+        self.v_box_1_inside_layout_3.addWidget(label1)
 
         self.v_box_2_inside_layout_3 = QVBoxLayout()
         combo1 = QComboBox(self)
         combo1_list = ['F6', 'F7', 'F8', 'F9', 'F0']
         combo1.addItems(combo1_list)
-        self.v_box_2_inside_layout_2.addWidget(combo1)
+        self.v_box_2_inside_layout_3.addWidget(combo1)
 
         self.h_box_layout_3.addLayout(self.v_box_1_inside_layout_3, 1)
         self.h_box_layout_3.addLayout(self.v_box_2_inside_layout_3, 1)
-
+        self.h_box_layout_3.addStretch(3)
 
         self.h_box_layout_4 = QHBoxLayout()  # 반복횟수 Hbox4
         self.v_box_1_inside_layout_4 = QVBoxLayout()
         label1 = QLabel('반복 횟수:')
         label1.setAlignment(Qt.AlignLeft)
+        self.v_box_1_inside_layout_4.setAlignment(Qt.AlignVCenter)
         self.v_box_1_inside_layout_4.addWidget(label1)
-        self.h_box_layout_4.addLayout(self.v_box_1_inside_layout_4, 5)
+
+        self.h_box_layout_4.addLayout(self.v_box_1_inside_layout_4, 1)
         # 예외 수정(2022.12.12)
         # 이전 코드
         # self.h_box_layout_2.addLayout(self.v_box_1_inside_layout_2)
@@ -280,12 +286,10 @@ class StartSetting(QWidget):
         self.textedit1.setText("  ")
         self.textedit1.setFixedSize(40, 20)
         self.v_box_2_inside_layout_4.addWidget(self.textedit1)
-        self.h_box_layout_4.addLayout(self.v_box_2_inside_layout_4)
+        self.h_box_layout_4.addLayout(self.v_box_2_inside_layout_4, 1)
+        self.h_box_layout_4.addStretch(3)
 
         self.h_box_layout_5 = QHBoxLayout()
-        qbn = QDialogButtonBox
-        qbn.setStandardButtons(QMessageBox.StandardButtons.Save | QMessageBox.StandardButtons.Cancel)
-
 
         self.wrapper = QVBoxLayout()
         self.wrapper.addLayout(self.h_box_layout_1, 1)
