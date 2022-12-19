@@ -218,10 +218,10 @@ class StartSetting(QWidget):
 
     def initWindow(self, title_str1):
         self.setWindowTitle(title_str1)
-        self.resize(200, 150)
+        self.resize(250, 150)
 
         self.h_box_layout_1 = QHBoxLayout() #label Hbox 1
-        label1 = QLabel('Macro 시작 버튼을 설정하세요. \n반복 횟수가 0일 경우 중지 버튼을 누르기 전까지 실행됩니다.', self)
+        label1 = QLabel('Macro 시작 버튼을 설정하세요. \n반복 횟수가 0일 경우 무한 루프.', self)
         label1.setAlignment(Qt.AlignLeft)
         self.h_box_layout_1.addWidget(label1)
 
@@ -290,6 +290,15 @@ class StartSetting(QWidget):
         self.h_box_layout_4.addStretch(3)
 
         self.h_box_layout_5 = QHBoxLayout()
+        Save_button = QPushButton('Save')
+        Cancel_button = QPushButton('Cancel')
+        self.v_box_1_inside_layout_5 = QVBoxLayout()
+        self.v_box_1_inside_layout_5.addWidget(Save_button)
+        self.v_box_2_inside_layout_5 = QVBoxLayout()
+        self.v_box_2_inside_layout_5.addWidget(Cancel_button)
+        self.h_box_layout_5.addLayout(self.v_box_1_inside_layout_5, 1)
+        self.h_box_layout_5.addLayout(self.v_box_2_inside_layout_5, 1)
+        self.h_box_layout_5.addStretch(3)
 
         self.wrapper = QVBoxLayout()
         self.wrapper.addLayout(self.h_box_layout_1, 1)
@@ -297,7 +306,7 @@ class StartSetting(QWidget):
         self.wrapper.addLayout(self.h_box_layout_2, 1)
         self.wrapper.addLayout(self.h_box_layout_3, 2)
         self.wrapper.addLayout(self.h_box_layout_4, 1)
-        # self.wrapper.addLayout(self.h_box_layout_5, 1)
+        self.wrapper.addLayout(self.h_box_layout_5, 1)
         self.setLayout(self.wrapper)
 
 
