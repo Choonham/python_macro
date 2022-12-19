@@ -1,6 +1,6 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QHBoxLayout, QVBoxLayout, QMainWindow, QRadioButton, \
-    QLineEdit, QLabel, QCheckBox, QListWidget, QTextEdit, QTextBrowser, QComboBox
+    QLineEdit, QLabel, QCheckBox, QListWidget, QTextEdit, QTextBrowser, QComboBox, QMessageBox, QDialogButtonBox
 from PyQt5 import QtWidgets, QtGui
 from PyQt5.QtCore import Qt
 
@@ -97,6 +97,15 @@ class MyApp(QWidget):
         self.edit_macro_window = AddAndEditMacroWindow("Edit Macro")
 
         self.edit_macro_window.show()
+
+    def closeEvent(self, event):
+        reply = QMessageBox.information(self, 'Warning', '종료하겠습니까?',
+                                    QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+
+        if reply == QMessageBox.Yes:
+            event.accept()
+        else:
+            event.ignore()
 
 
 class AddAndEditMacroWindow(QWidget):
@@ -195,7 +204,7 @@ class AddAndEditMacroWindow(QWidget):
         start_button.clicked.connect(self.start_macro)
 
     def start_macro(self):
-        self.start_macro_window = StartSetting("Start setting")
+        self.start_macro_window = StartSetting("시작/중지 설정")
 
         self.start_macro_window.show()
 
@@ -209,15 +218,15 @@ class StartSetting(QWidget):
 
     def initWindow(self, title_str1):
         self.setWindowTitle(title_str1)
-        self.resize(350, 300)
+        self.resize(200, 150)
 
-        self.h_box_layout_1 = QHBoxLayout()
+        self.h_box_layout_1 = QHBoxLayout() #label Hbox 1
         label1 = QLabel('Macro 시작 버튼을 설정하세요. \n반복 횟수가 0일 경우 중지 버튼을 누르기 전까지 실행됩니다.', self)
         label1.setAlignment(Qt.AlignLeft)
         self.h_box_layout_1.addWidget(label1)
 
 
-        self.h_box_layout_2 = QHBoxLayout()
+        self.h_box_layout_2 = QHBoxLayout() #시작버튼 Hbox2
 
         self.v_box_1_inside_layout_2 = QVBoxLayout()
         label1 = QLabel('시작 버튼: ')
@@ -229,24 +238,66 @@ class StartSetting(QWidget):
         # QVBoxLayout() 메서드가 사용 가능한 QVBoxLayout 객체를 반환합니다.
         # 그냥 QVBoxLayout 만 사용 하시면 안 됩니다.
         self.v_box_2_inside_layout_2 = QVBoxLayout()
-
         combo1 = QComboBox(self)
-        combo1_list = ['네이버', '카카오', '라인', '쿠팡', '배달의민족']
+        combo1_list = ['F1', 'F2', 'F3', 'F4', 'F5']
         combo1.addItems(combo1_list)
         self.v_box_2_inside_layout_2.addWidget(combo1)
 
         self.h_box_layout_2.addLayout(self.v_box_1_inside_layout_2, 1)
         self.h_box_layout_2.addLayout(self.v_box_2_inside_layout_2, 1)
 
-        #221216 Combobox를 위해 import로 QtWdiget 및 QtGui 선언
-        #Debug시 이상한 Error 발생
-        # 다시 수정했는데 왜 안되는지 모르겠음...
+        self.h_box_layout_3 = QHBoxLayout() #종료버튼 Hbox3
 
+        self.v_box_1_inside_layout_3 = QVBoxLayout()
+        label1 = QLabel('종료 버튼: ')
+        label1.setAlignment(Qt.AlignLeft)
+        self.v_box_1_inside_layout_2.addWidget(label1)
+
+        self.v_box_2_inside_layout_3 = QVBoxLayout()
+        combo1 = QComboBox(self)
+        combo1_list = ['F6', 'F7', 'F8', 'F9', 'F0']
+        combo1.addItems(combo1_list)
+        self.v_box_2_inside_layout_2.addWidget(combo1)
+
+        self.h_box_layout_3.addLayout(self.v_box_1_inside_layout_3, 1)
+        self.h_box_layout_3.addLayout(self.v_box_2_inside_layout_3, 1)
+
+
+        self.h_box_layout_4 = QHBoxLayout()  # 반복횟수 Hbox4
+        self.v_box_1_inside_layout_4 = QVBoxLayout()
+        label1 = QLabel('반복 횟수:')
+        label1.setAlignment(Qt.AlignLeft)
+        self.v_box_1_inside_layout_4.addWidget(label1)
+        self.h_box_layout_4.addLayout(self.v_box_1_inside_layout_4, 5)
+        # 예외 수정(2022.12.12)
+        # 이전 코드
+        # self.h_box_layout_2.addLayout(self.v_box_1_inside_layout_2)
+        # addWidget 으로 layout 추가하려는 이상한 시도 수정
+
+        self.v_box_2_inside_layout_4 = QVBoxLayout()
+        name1 = QLineEdit()
+        self.textedit1 = QLineEdit(self)
+        self.textedit1.setText("  ")
+        self.textedit1.setFixedSize(40, 20)
+        self.v_box_2_inside_layout_4.addWidget(self.textedit1)
+        self.h_box_layout_4.addLayout(self.v_box_2_inside_layout_4)
+
+        # self.h_box_layout_5 = QHBoxLayout()
+        # Dailog_button = QDialogButtonBox()
+        # buttonbox = QDialogButtonBox(QDialogButtonBox)
+        #
+        # Dailog_button.accepted.connect(self.cancel.callback)
+        # Dailog_button.rejected.connect(self.save.callback)
+        #
+        # self.h_box_layout_5.addWidget(Dailog_button)
 
         self.wrapper = QVBoxLayout()
-        self.wrapper.addLayout(self.h_box_layout_1)
+        self.wrapper.addLayout(self.h_box_layout_1, 1)
         self.wrapper.setAlignment(Qt.AlignTop)
-        self.wrapper.addLayout(self.h_box_layout_2, 5)
+        self.wrapper.addLayout(self.h_box_layout_2, 1)
+        self.wrapper.addLayout(self.h_box_layout_3, 2)
+        self.wrapper.addLayout(self.h_box_layout_4, 1)
+        # self.wrapper.addLayout(self.h_box_layout_5, 1)
         self.setLayout(self.wrapper)
 
 
