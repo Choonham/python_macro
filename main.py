@@ -282,14 +282,10 @@ class StartSetting(QWidget):
         self.v_box_2_inside_layout_4.addWidget(self.textedit1)
         self.h_box_layout_4.addLayout(self.v_box_2_inside_layout_4)
 
-        # self.h_box_layout_5 = QHBoxLayout()
-        # Dailog_button = QDialogButtonBox()
-        # buttonbox = QDialogButtonBox(QDialogButtonBox)
-        #
-        # Dailog_button.accepted.connect(self.cancel.callback)
-        # Dailog_button.rejected.connect(self.save.callback)
-        #
-        # self.h_box_layout_5.addWidget(Dailog_button)
+        self.h_box_layout_5 = QHBoxLayout()
+        qbn = QDialogButtonBox
+        qbn.setStandardButtons(QMessageBox.StandardButtons.Save | QMessageBox.StandardButtons.Cancel)
+
 
         self.wrapper = QVBoxLayout()
         self.wrapper.addLayout(self.h_box_layout_1, 1)
