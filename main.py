@@ -324,6 +324,7 @@ class MouseSetting(QWidget):    ###시작/중지 설정###
         super().__init__()
         self.initWindow(title_str2)
 
+
     def initWindow(self, title_str2):
         self.setWindowTitle(title_str2)
         self.resize(250, 150)
@@ -333,21 +334,109 @@ class MouseSetting(QWidget):    ###시작/중지 설정###
         label1.setAlignment(Qt.AlignLeft)
         self.h_box_layout_1.addWidget(label1)
 
-        self.h_box_layout_2 = QHBoxLayout() #시작버튼 Hbox2
+
+
+        self.h_box_layout_2 = QHBoxLayout() #마우스 커서
         self.v_box_1_inside_layout_2 = QVBoxLayout()
         self.v_box_1_inside_layout_2.setAlignment(Qt.AlignVCenter)
-        label1 = QLabel('Mouse 좌표: ')
+        label1 = QLabel('현재 Mouse 좌표: ')
         label1.setAlignment(Qt.AlignLeft)
         self.v_box_1_inside_layout_2.addWidget(label1)
         self.h_box_layout_2.addLayout(self.v_box_1_inside_layout_2, 1)
 
-
         self.v_box_2_inside_layout_2 = QVBoxLayout()
+        self.textedit1 = QLineEdit(self)
+        self.textedit1.setText("  ")
+        self.textedit1.setFixedSize(40, 20)
+        self.v_box_2_inside_layout_2.addWidget(self.textedit1)
+        self.h_box_layout_2.addLayout(self.v_box_2_inside_layout_2, 1)
+
+        self.v_box_3_inside_layout_2 = QVBoxLayout()
+        self.textedit2 = QLineEdit(self)
+        self.textedit2.setText("  ")
+        self.textedit2.setFixedSize(40, 20)
+        self.v_box_3_inside_layout_2.addWidget(self.textedit2)
+        self.h_box_layout_2.addLayout(self.v_box_3_inside_layout_2, 1)
+
+
+        self.h_box_layout_3 = QHBoxLayout()  # 마우스 절대위치
+        self.v_box_1_inside_layout_3 = QVBoxLayout()
+        self.v_box_1_inside_layout_3.setAlignment(Qt.AlignVCenter)
+        label1 = QLabel('마우스 절대위치: ')
+        label1.setAlignment(Qt.AlignLeft)
+        self.v_box_1_inside_layout_3.addWidget(label1)
+        self.h_box_layout_3.addLayout(self.v_box_1_inside_layout_3, 1)
+
+        self.v_box_2_inside_layout_3 = QVBoxLayout()
+        self.textedit1 = QLineEdit(self)
+        self.textedit1.setText("  ")
+        self.textedit1.setFixedSize(40, 20)
+        self.v_box_2_inside_layout_3.addWidget(self.textedit1)
+        self.h_box_layout_3.addLayout(self.v_box_2_inside_layout_3, 1)
+
+        self.v_box_3_inside_layout_3 = QVBoxLayout()
+        self.textedit2 = QLineEdit(self)
+        self.textedit2.setText("  ")
+        self.textedit2.setFixedSize(40, 20)
+        self.v_box_3_inside_layout_3.addWidget(self.textedit2)
+        self.h_box_layout_3.addLayout(self.v_box_3_inside_layout_3, 1)
+
+
+
+
+        self.h_box_layout_4 = QHBoxLayout()  # 종료버튼 Hbox3
+        self.v_box_1_inside_layout_4 = QVBoxLayout()
+        label1 = QLabel('마우스 버튼: ')
+        label1.setAlignment(Qt.AlignLeft)
+        self.v_box_1_inside_layout_4.setAlignment(Qt.AlignVCenter)
+        self.v_box_1_inside_layout_4.addWidget(label1)
+
+        self.v_box_2_inside_layout_4 = QVBoxLayout()
+        combo1 = QComboBox(self)
+        combo1_list = ['왼쪽 버튼', '오른쪽 버튼']
+        combo1.addItems(combo1_list)
+        self.v_box_2_inside_layout_4.addWidget(combo1)
+
+        self.h_box_layout_4.addLayout(self.v_box_1_inside_layout_4, 1)
+        self.h_box_layout_4.addLayout(self.v_box_2_inside_layout_4, 1)
+        self.h_box_layout_4.addStretch(3)
+
+
+
+        self.mouse_left_radio = QRadioButton("클릭")
+        # self.mouse_left_radio.setObjectName("mouse_left_radio")
+        self.mouse_hold_radio = QRadioButton("누르기")
+        # self.mouse_right_radio.setObjectName("mouse_hold_radio")
+        self.mouse_off_radio = QRadioButton("누르기")
+        # self.mouse_right_radio.setObjectName("mouse_off_radio")
+        #layout_1 = start & Stop layout
+        self.h_box_layout_5 = QHBoxLayout()
+        self.h_box_layout_5.addWidget(self.mouse_left_radio)
+        self.h_box_layout_5.addWidget(self.mouse_hold_radio)
+        self.h_box_layout_5.addWidget(self.mouse_off_radio)
+
+
+
+        self.h_box_layout_6 = QHBoxLayout()
+        Save_button = QPushButton('Save')
+        Cancel_button = QPushButton('Cancel')
+        self.v_box_1_inside_layout_6 = QVBoxLayout()
+        self.v_box_1_inside_layout_6.addWidget(Save_button)
+        self.v_box_2_inside_layout_6 = QVBoxLayout()
+        self.v_box_2_inside_layout_6.addWidget(Cancel_button)
+        self.h_box_layout_6.addLayout(self.v_box_1_inside_layout_6, 1)
+        self.h_box_layout_6.addLayout(self.v_box_2_inside_layout_6, 1)
+        self.h_box_layout_6.addStretch(3)
 
 
         self.wrapper = QVBoxLayout()
         self.wrapper.addLayout(self.h_box_layout_1, 1)
-
+        self.wrapper.addLayout(self.h_box_layout_2, 1)
+        self.wrapper.addLayout(self.h_box_layout_3, 1)
+        self.wrapper.addLayout(self.h_box_layout_4, 1)
+        self.wrapper.addLayout(self.h_box_layout_5, 1)
+        self.wrapper.addLayout(self.h_box_layout_6, 1)
+        self.setLayout(self.wrapper)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
