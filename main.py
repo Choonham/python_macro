@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QHBoxLayout, QVB
     QLineEdit, QLabel, QCheckBox, QListWidget, QTextEdit, QTextBrowser, QComboBox, QMessageBox, QDialogButtonBox
 from PyQt5 import QtWidgets, QtGui
 from PyQt5.QtCore import Qt
+import keyboard, pyautogui, time
 
 class MyApp(QWidget):
 
@@ -202,14 +203,21 @@ class AddAndEditMacroWindow(QWidget):
         self.setLayout(self.wrapper)
 
         start_button.clicked.connect(self.start_macro)
+        mouse_button.clicked.connect(self.mouse_macro)
+
 
     def start_macro(self):
         self.start_macro_window = StartSetting("시작/중지 설정")
 
         self.start_macro_window.show()
 
+    def mouse_macro(self):
+        self.mouse_macro_window = MouseSetting("Mouse 좌표 설정")
 
-class StartSetting(QWidget):
+        self.mouse_macro_window.show()
+
+
+class StartSetting(QWidget):    ###시작/중지 설정###
 
     def __init__(self, title_str1):
         super().__init__()
@@ -218,7 +226,7 @@ class StartSetting(QWidget):
 
     def initWindow(self, title_str1):
         self.setWindowTitle(title_str1)
-        self.resize(250, 150)
+        self.resize(350, 150)
 
         self.h_box_layout_1 = QHBoxLayout() #label Hbox 1
         label1 = QLabel('Macro 시작 버튼을 설정하세요. \n반복 횟수가 0일 경우 무한 루프.', self)
@@ -308,6 +316,37 @@ class StartSetting(QWidget):
         self.wrapper.addLayout(self.h_box_layout_4, 1)
         self.wrapper.addLayout(self.h_box_layout_5, 1)
         self.setLayout(self.wrapper)
+
+
+class MouseSetting(QWidget):    ###시작/중지 설정###
+
+    def __init__(self, title_str2):
+        super().__init__()
+        self.initWindow(title_str2)
+
+    def initWindow(self, title_str2):
+        self.setWindowTitle(title_str2)
+        self.resize(250, 150)
+
+        self.h_box_layout_1 = QHBoxLayout() #label Hbox 1
+        label1 = QLabel('Mouse 좌표를 설정하세요. \nF10을 통해 현재 좌표 저장.', self)
+        label1.setAlignment(Qt.AlignLeft)
+        self.h_box_layout_1.addWidget(label1)
+
+        self.h_box_layout_2 = QHBoxLayout() #시작버튼 Hbox2
+        self.v_box_1_inside_layout_2 = QVBoxLayout()
+        self.v_box_1_inside_layout_2.setAlignment(Qt.AlignVCenter)
+        label1 = QLabel('Mouse 좌표: ')
+        label1.setAlignment(Qt.AlignLeft)
+        self.v_box_1_inside_layout_2.addWidget(label1)
+        self.h_box_layout_2.addLayout(self.v_box_1_inside_layout_2, 1)
+
+
+        self.v_box_2_inside_layout_2 = QVBoxLayout()
+
+
+        self.wrapper = QVBoxLayout()
+        self.wrapper.addLayout(self.h_box_layout_1, 1)
 
 
 if __name__ == '__main__':
