@@ -29,7 +29,6 @@ class MyApp(QWidget):
 
         self.macro_start_radio = QRadioButton("매크로 시작")
         self.macro_start_radio.setObjectName("macro_start_radio")
-
         self.macro_stop_radio = QRadioButton("매크로 중지")
         self.macro_stop_radio.setObjectName("macro_stop_radio")
 
@@ -38,6 +37,9 @@ class MyApp(QWidget):
         self.h_box_layout_1.addWidget(self.macro_start_radio)
         self.h_box_layout_1.addWidget(self.macro_stop_radio)
         self.h_box_layout_1.addStretch(2)
+
+
+
 
         #layout2 = label과 push버튼을 포함한 layout
         self.h_box_layout_2 = QHBoxLayout()
@@ -70,6 +72,9 @@ class MyApp(QWidget):
         self.h_box_layout_2.addLayout(self.v_box_1_inside_layout_2, 3)
         self.h_box_layout_2.addLayout(self.v_box_2_inside_layout_2, 1)
 
+
+
+
         # layout3 = 체크박스를 포함한 layout
         self.h_box_layout_3 = QHBoxLayout()
         self.float_top = QCheckBox("최상단에 띄우기")
@@ -99,6 +104,8 @@ class MyApp(QWidget):
 
         self.edit_macro_window.show()
 
+
+
     def closeEvent(self, event):
         reply = QMessageBox.information(self, 'Warning', '종료하겠습니까?',
                                     QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
@@ -107,6 +114,8 @@ class MyApp(QWidget):
             event.accept()
         else:
             event.ignore()
+
+
 
 
 class AddAndEditMacroWindow(QWidget):
@@ -126,9 +135,9 @@ class AddAndEditMacroWindow(QWidget):
         label1.setAlignment(Qt.AlignLeft)
         self.h_box_layout_1.addWidget(label1)
 
-        # font1 = label1.font()
-        # font1.setPointSize(12)
-        # label1.setFont(font1)
+
+
+
 
         self.h_box_layout_2 = QHBoxLayout()
 
@@ -158,6 +167,9 @@ class AddAndEditMacroWindow(QWidget):
         delay_button = QPushButton('지연 추가')
         delect_button = QPushButton('삭제')
         save_button = QPushButton('저장')
+
+
+
 
 
         self.h_box_layout_3 = QHBoxLayout()
@@ -217,6 +229,9 @@ class AddAndEditMacroWindow(QWidget):
         self.mouse_macro_window.show()
 
 
+
+
+
 class StartSetting(QWidget):    ###시작/중지 설정###
 
     def __init__(self, title_str1):
@@ -232,6 +247,7 @@ class StartSetting(QWidget):    ###시작/중지 설정###
         label1 = QLabel('Macro 시작 버튼을 설정하세요. \n반복 횟수가 0일 경우 무한 루프.', self)
         label1.setAlignment(Qt.AlignLeft)
         self.h_box_layout_1.addWidget(label1)
+
 
 
         self.h_box_layout_2 = QHBoxLayout() #시작버튼 Hbox2
@@ -257,6 +273,9 @@ class StartSetting(QWidget):    ###시작/중지 설정###
         self.h_box_layout_2.addLayout(self.v_box_2_inside_layout_2, 1)
         self.h_box_layout_2.addStretch(3)
 
+
+
+
         self.h_box_layout_3 = QHBoxLayout() #종료버튼 Hbox3
 
         self.v_box_1_inside_layout_3 = QVBoxLayout()
@@ -274,6 +293,9 @@ class StartSetting(QWidget):    ###시작/중지 설정###
         self.h_box_layout_3.addLayout(self.v_box_1_inside_layout_3, 1)
         self.h_box_layout_3.addLayout(self.v_box_2_inside_layout_3, 1)
         self.h_box_layout_3.addStretch(3)
+
+
+
 
         self.h_box_layout_4 = QHBoxLayout()  # 반복횟수 Hbox4
         self.v_box_1_inside_layout_4 = QVBoxLayout()
@@ -297,6 +319,9 @@ class StartSetting(QWidget):    ###시작/중지 설정###
         self.h_box_layout_4.addLayout(self.v_box_2_inside_layout_4, 1)
         self.h_box_layout_4.addStretch(3)
 
+
+
+
         self.h_box_layout_5 = QHBoxLayout()
         Save_button = QPushButton('Save')
         Cancel_button = QPushButton('Cancel')
@@ -316,6 +341,8 @@ class StartSetting(QWidget):    ###시작/중지 설정###
         self.wrapper.addLayout(self.h_box_layout_4, 1)
         self.wrapper.addLayout(self.h_box_layout_5, 1)
         self.setLayout(self.wrapper)
+
+
 
 
 class MouseSetting(QWidget):    ###시작/중지 설정###
@@ -357,6 +384,8 @@ class MouseSetting(QWidget):    ###시작/중지 설정###
         self.textedit2.setFixedSize(40, 20)
         self.v_box_3_inside_layout_2.addWidget(self.textedit2)
         self.h_box_layout_2.addLayout(self.v_box_3_inside_layout_2, 1)
+
+
 
 
         self.h_box_layout_3 = QHBoxLayout()  # 마우스 절대위치
@@ -403,6 +432,7 @@ class MouseSetting(QWidget):    ###시작/중지 설정###
 
 
 
+
         self.mouse_left_radio = QRadioButton("클릭")
         # self.mouse_left_radio.setObjectName("mouse_left_radio")
         self.mouse_hold_radio = QRadioButton("누르기")
@@ -427,6 +457,7 @@ class MouseSetting(QWidget):    ###시작/중지 설정###
         self.h_box_layout_6.addLayout(self.v_box_1_inside_layout_6, 1)
         self.h_box_layout_6.addLayout(self.v_box_2_inside_layout_6, 1)
         self.h_box_layout_6.addStretch(3)
+
 
 
         self.wrapper = QVBoxLayout()
