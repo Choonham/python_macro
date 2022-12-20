@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QHBoxLayout, QVB
     QLineEdit, QLabel, QCheckBox, QListWidget, QTextEdit, QTextBrowser, QComboBox, QMessageBox, QDialogButtonBox
 from PyQt5 import QtWidgets, QtGui
 from PyQt5.QtCore import Qt
-import keyboard, pyautogui, time
+
 
 class MyApp(QWidget):
 
