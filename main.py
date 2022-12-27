@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QHBoxLayout, QVB
     QLineEdit, QLabel, QCheckBox, QListWidget, QTextEdit, QTextBrowser, QComboBox, QMessageBox, QDialogButtonBox
 from PyQt5 import QtWidgets, QtGui
 from PyQt5.QtCore import Qt
-
+import keyboard, pyautogui, time
 
 class MyApp(QWidget):
 
@@ -29,6 +29,7 @@ class MyApp(QWidget):
 
         self.macro_start_radio = QRadioButton("매크로 시작")
         self.macro_start_radio.setObjectName("macro_start_radio")
+
         self.macro_stop_radio = QRadioButton("매크로 중지")
         self.macro_stop_radio.setObjectName("macro_stop_radio")
 
@@ -37,9 +38,6 @@ class MyApp(QWidget):
         self.h_box_layout_1.addWidget(self.macro_start_radio)
         self.h_box_layout_1.addWidget(self.macro_stop_radio)
         self.h_box_layout_1.addStretch(2)
-
-
-
 
         #layout2 = label과 push버튼을 포함한 layout
         self.h_box_layout_2 = QHBoxLayout()
@@ -72,9 +70,6 @@ class MyApp(QWidget):
         self.h_box_layout_2.addLayout(self.v_box_1_inside_layout_2, 3)
         self.h_box_layout_2.addLayout(self.v_box_2_inside_layout_2, 1)
 
-
-
-
         # layout3 = 체크박스를 포함한 layout
         self.h_box_layout_3 = QHBoxLayout()
         self.float_top = QCheckBox("최상단에 띄우기")
@@ -104,8 +99,6 @@ class MyApp(QWidget):
 
         self.edit_macro_window.show()
 
-
-
     def closeEvent(self, event):
         reply = QMessageBox.information(self, 'Warning', '종료하겠습니까?',
                                     QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
@@ -115,9 +108,7 @@ class MyApp(QWidget):
         else:
             event.ignore()
 
-
-
-
+######################################## Add & Edit 창 화면 ############################################
 class AddAndEditMacroWindow(QWidget):
 #Myapp(Qwidget)의 상속 class 시작
     def __init__(self, title_str):
@@ -135,9 +126,9 @@ class AddAndEditMacroWindow(QWidget):
         label1.setAlignment(Qt.AlignLeft)
         self.h_box_layout_1.addWidget(label1)
 
-
-
-
+        # font1 = label1.font()
+        # font1.setPointSize(12)
+        # label1.setFont(font1)
 
         self.h_box_layout_2 = QHBoxLayout()
 
@@ -167,9 +158,6 @@ class AddAndEditMacroWindow(QWidget):
         delay_button = QPushButton('지연 추가')
         delect_button = QPushButton('삭제')
         save_button = QPushButton('저장')
-
-
-
 
 
         self.h_box_layout_3 = QHBoxLayout()
@@ -214,25 +202,33 @@ class AddAndEditMacroWindow(QWidget):
 
         self.setLayout(self.wrapper)
 
+
+        ####### button setting  #########
         start_button.clicked.connect(self.start_macro)
         mouse_button.clicked.connect(self.mouse_macro)
+        keyboard_button.clicked.connect(self.keyboard_macro)
+        delay_button.clicked.connect(self.delay_macro)
 
 
     def start_macro(self):
         self.start_macro_window = StartSetting("시작/중지 설정")
-
         self.start_macro_window.show()
 
     def mouse_macro(self):
         self.mouse_macro_window = MouseSetting("Mouse 좌표 설정")
-
         self.mouse_macro_window.show()
 
+    def keyboard_macro(self):
+        self.keyboard_macro_window = KeyboardSetting("키보드 입력 설정")
+        self.keyboard_macro_window.show()
+
+    def delay_macro(self):
+        self.delay_macro_window = DelaySetting("키보드 입력 설정")
+        self.delay_macro_window.show()
 
 
-
-
-class StartSetting(QWidget):    ###시작/중지 설정###
+#################################### 시작/중지 설정 of Add & Edit 창 ###########################################
+class StartSetting(QWidget):
 
     def __init__(self, title_str1):
         super().__init__()
@@ -247,7 +243,6 @@ class StartSetting(QWidget):    ###시작/중지 설정###
         label1 = QLabel('Macro 시작 버튼을 설정하세요. \n반복 횟수가 0일 경우 무한 루프.', self)
         label1.setAlignment(Qt.AlignLeft)
         self.h_box_layout_1.addWidget(label1)
-
 
 
         self.h_box_layout_2 = QHBoxLayout() #시작버튼 Hbox2
@@ -273,9 +268,6 @@ class StartSetting(QWidget):    ###시작/중지 설정###
         self.h_box_layout_2.addLayout(self.v_box_2_inside_layout_2, 1)
         self.h_box_layout_2.addStretch(3)
 
-
-
-
         self.h_box_layout_3 = QHBoxLayout() #종료버튼 Hbox3
 
         self.v_box_1_inside_layout_3 = QVBoxLayout()
@@ -293,9 +285,6 @@ class StartSetting(QWidget):    ###시작/중지 설정###
         self.h_box_layout_3.addLayout(self.v_box_1_inside_layout_3, 1)
         self.h_box_layout_3.addLayout(self.v_box_2_inside_layout_3, 1)
         self.h_box_layout_3.addStretch(3)
-
-
-
 
         self.h_box_layout_4 = QHBoxLayout()  # 반복횟수 Hbox4
         self.v_box_1_inside_layout_4 = QVBoxLayout()
@@ -319,9 +308,6 @@ class StartSetting(QWidget):    ###시작/중지 설정###
         self.h_box_layout_4.addLayout(self.v_box_2_inside_layout_4, 1)
         self.h_box_layout_4.addStretch(3)
 
-
-
-
         self.h_box_layout_5 = QHBoxLayout()
         Save_button = QPushButton('Save')
         Cancel_button = QPushButton('Cancel')
@@ -343,9 +329,8 @@ class StartSetting(QWidget):    ###시작/중지 설정###
         self.setLayout(self.wrapper)
 
 
-
-
-class MouseSetting(QWidget):    ###시작/중지 설정###
+############################## 마우스 설정 of Add & Edit 창 #########################################
+class MouseSetting(QWidget):
 
     def __init__(self, title_str2):
         super().__init__()
@@ -386,8 +371,6 @@ class MouseSetting(QWidget):    ###시작/중지 설정###
         self.h_box_layout_2.addLayout(self.v_box_3_inside_layout_2, 1)
 
 
-
-
         self.h_box_layout_3 = QHBoxLayout()  # 마우스 절대위치
         self.v_box_1_inside_layout_3 = QVBoxLayout()
         self.v_box_1_inside_layout_3.setAlignment(Qt.AlignVCenter)
@@ -411,8 +394,6 @@ class MouseSetting(QWidget):    ###시작/중지 설정###
         self.h_box_layout_3.addLayout(self.v_box_3_inside_layout_3, 1)
 
 
-
-
         self.h_box_layout_4 = QHBoxLayout()  # 종료버튼 Hbox3
         self.v_box_1_inside_layout_4 = QVBoxLayout()
         label1 = QLabel('마우스 버튼: ')
@@ -425,26 +406,17 @@ class MouseSetting(QWidget):    ###시작/중지 설정###
         combo1_list = ['왼쪽 버튼', '오른쪽 버튼']
         combo1.addItems(combo1_list)
         self.v_box_2_inside_layout_4.addWidget(combo1)
-
         self.h_box_layout_4.addLayout(self.v_box_1_inside_layout_4, 1)
         self.h_box_layout_4.addLayout(self.v_box_2_inside_layout_4, 1)
         self.h_box_layout_4.addStretch(3)
 
-
-
-
-        self.mouse_left_radio = QRadioButton("클릭")
-        # self.mouse_left_radio.setObjectName("mouse_left_radio")
-        self.mouse_hold_radio = QRadioButton("누르기")
-        # self.mouse_right_radio.setObjectName("mouse_hold_radio")
-        self.mouse_off_radio = QRadioButton("누르기")
-        # self.mouse_right_radio.setObjectName("mouse_off_radio")
-        #layout_1 = start & Stop layout
         self.h_box_layout_5 = QHBoxLayout()
-        self.h_box_layout_5.addWidget(self.mouse_left_radio)
+        self.mouse_click_radio = QRadioButton("클릭")
+        self.mouse_hold_radio = QRadioButton("누르기")
+        self.mouse_off_radio = QRadioButton("떼기")
+        self.h_box_layout_5.addWidget(self.mouse_click_radio)
         self.h_box_layout_5.addWidget(self.mouse_hold_radio)
         self.h_box_layout_5.addWidget(self.mouse_off_radio)
-
 
 
         self.h_box_layout_6 = QHBoxLayout()
@@ -458,8 +430,6 @@ class MouseSetting(QWidget):    ###시작/중지 설정###
         self.h_box_layout_6.addLayout(self.v_box_2_inside_layout_6, 1)
         self.h_box_layout_6.addStretch(3)
 
-
-
         self.wrapper = QVBoxLayout()
         self.wrapper.addLayout(self.h_box_layout_1, 1)
         self.wrapper.addLayout(self.h_box_layout_2, 1)
@@ -468,6 +438,114 @@ class MouseSetting(QWidget):    ###시작/중지 설정###
         self.wrapper.addLayout(self.h_box_layout_5, 1)
         self.wrapper.addLayout(self.h_box_layout_6, 1)
         self.setLayout(self.wrapper)
+
+
+############################## 키보드 설정 of Add & Edit 창 #########################################
+class KeyboardSetting(QWidget):
+
+    def __init__(self, title_str3):
+        super().__init__()
+        self.initWindow(title_str3)
+
+    def initWindow(self, title_str3):
+        self.setWindowTitle(title_str3)
+        self.resize(350, 150)
+
+        self.h_box_layout_1 = QHBoxLayout() #label Hbox 1
+        label1 = QLabel('입력할 키보드 값을 선택하세요.', self)
+        label1.setAlignment(Qt.AlignLeft)
+        self.h_box_layout_1.addWidget(label1)
+
+
+        self.h_box_layout_2 = QHBoxLayout() #시작버튼 Hbox2
+        self.v_box_1_inside_layout_2 = QVBoxLayout()
+        self.v_box_1_inside_layout_2.setAlignment(Qt.AlignVCenter)
+        label1 = QLabel('키보드 버튼: ')
+        label1.setAlignment(Qt.AlignLeft)
+        self.v_box_1_inside_layout_2.addWidget(label1)
+
+        self.v_box_2_inside_layout_2 = QVBoxLayout()
+        combo1 = QComboBox(self)
+        combo1_list = ['A', 'B', 'C', 'D', 'E', 'F', 'G' , 'H' , 'I' , 'J', 'K', 'L', 'M', \
+                       'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+        combo1.addItems(combo1_list)
+        self.v_box_2_inside_layout_2.addWidget(combo1)
+
+        self.h_box_layout_2.addLayout(self.v_box_1_inside_layout_2, 1)
+        self.h_box_layout_2.addLayout(self.v_box_2_inside_layout_2, 1)
+        self.h_box_layout_2.addStretch(3)
+
+        self.h_box_layout_3 = QHBoxLayout()
+        self.keyboard_click_radio = QRadioButton("클릭")
+        self.keyboard_hold_radio = QRadioButton("누르기")
+        self.keyboard_off_radio = QRadioButton("떼기")
+        self.h_box_layout_3.addWidget(self.keyboard_click_radio)
+        self.h_box_layout_3.addWidget(self.keyboard_hold_radio)
+        self.h_box_layout_3.addWidget(self.keyboard_off_radio)
+
+        self.h_box_layout_4 = QHBoxLayout()
+        Save_button = QPushButton('Save')
+        Cancel_button = QPushButton('Cancel')
+        self.v_box_1_inside_layout_4 = QVBoxLayout()
+        self.v_box_1_inside_layout_4.addWidget(Save_button)
+        self.v_box_2_inside_layout_4 = QVBoxLayout()
+        self.v_box_2_inside_layout_4.addWidget(Cancel_button)
+        self.h_box_layout_4.addLayout(self.v_box_1_inside_layout_4, 1)
+        self.h_box_layout_4.addLayout(self.v_box_2_inside_layout_4, 1)
+        self.h_box_layout_4.addStretch(3)
+
+        self.wrapper = QVBoxLayout()
+        self.wrapper.addLayout(self.h_box_layout_1, 1)
+        self.wrapper.addLayout(self.h_box_layout_2, 1)
+        self.wrapper.addLayout(self.h_box_layout_3, 1)
+        self.wrapper.addLayout(self.h_box_layout_4, 1)
+        self.setLayout(self.wrapper)
+
+############################## 시간 지연 of Add & Edit 창 #########################################
+class DelaySetting(QWidget):
+
+    def __init__(self, title_str4):
+        super().__init__()
+        self.initWindow(title_str4)
+
+    def initWindow(self, title_str4):
+        self.setWindowTitle(title_str4)
+        self.resize(150, 100)
+
+
+        self.h_box_layout_1 = QHBoxLayout()
+        self.v_box_1_inside_layout_1 = QVBoxLayout()
+        self.v_box_1_inside_layout_1.setAlignment(Qt.AlignVCenter)
+        label1 = QLabel('지연 값 입력(초 단위): ')
+        label1.setAlignment(Qt.AlignLeft)
+        self.v_box_1_inside_layout_1.addWidget(label1)
+        self.h_box_layout_1.addLayout(self.v_box_1_inside_layout_1, 1)
+
+        self.v_box_2_inside_layout_1 = QVBoxLayout()
+        name1 = QLineEdit()
+        self.textedit1 = QLineEdit(self)
+        self.textedit1.setText("  ")
+        self.textedit1.setFixedSize(40, 20)
+        self.v_box_2_inside_layout_1.addWidget(self.textedit1)
+        self.h_box_layout_1.addLayout(self.v_box_2_inside_layout_1, 1)
+        self.h_box_layout_1.addStretch(3)
+
+        self.h_box_layout_2 = QHBoxLayout()
+        Save_button = QPushButton('Save')
+        Cancel_button = QPushButton('Cancel')
+        self.v_box_1_inside_layout_2 = QVBoxLayout()
+        self.v_box_1_inside_layout_2.addWidget(Save_button)
+        self.v_box_2_inside_layout_2 = QVBoxLayout()
+        self.v_box_2_inside_layout_2.addWidget(Cancel_button)
+        self.h_box_layout_2.addLayout(self.v_box_1_inside_layout_2, 1)
+        self.h_box_layout_2.addLayout(self.v_box_2_inside_layout_2, 1)
+        self.h_box_layout_2.addStretch(3)
+
+        self.wrapper = QVBoxLayout()
+        self.wrapper.addLayout(self.h_box_layout_1, 1)
+        self.wrapper.addLayout(self.h_box_layout_2, 1)
+        self.setLayout(self.wrapper)
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
